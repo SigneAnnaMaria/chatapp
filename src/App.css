@@ -90,7 +90,29 @@ body {
   background-color: #20b2aa !important;
 }
 
+.custom-button:active {
+  background-color: #178e88 !important;
+}
+
 h4 {
   color: #5f9ea0;
   margin-bottom: 20px;
+}
+
+.ListGroup {
+  margin-bottom: 20px;
+}
+
+.Button {
+  background-color: #007bff;
+  border: none;
+  color: #ffffff;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.Button:hover {
+  background-color: #0056b3;
 }

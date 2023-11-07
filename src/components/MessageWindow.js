@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { ListGroup } from 'react-bootstrap'
 import { useChat } from './ChatContext'
 
 const MessageWindow = () => {
   const ctx = useChat()
+  const messagesEndRef = useRef(null)
+
+  useEffect(() => {
+    console.log(ctx.messages)
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
+    }
+  }, [ctx.socket, ctx.messages, ctx.currentRoom])
 
   return (
     <ListGroup className="message-window">
@@ -28,6 +36,7 @@ const MessageWindow = () => {
           </ListGroup.Item>
         </div>
       ))}
+      <div ref={messagesEndRef} />
     </ListGroup>
   )
 }

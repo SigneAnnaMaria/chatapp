@@ -22,22 +22,32 @@ const ChatRooms = () => {
   }
 
   const changeRoom = (newRoomId) => {
-    ctx.socket.emit('leave_room', {
-      roomId: ctx.currentRoom,
-      username: ctx.username,
-    })
+    if (ctx.currentRoom && ctx.currentRoom !== newRoomId) {
+      ctx.socket.emit('leave_room', {
+        roomId: ctx.currentRoom,
+        username: ctx.username,
+      })
+    }
 
-    ctx.setCurrentRoom(newRoomId)
+    if (ctx.currentRoom !== newRoomId) {
+      ctx.setCurrentRoom(newRoomId)
 
-    ctx.setMessages((prevMessages) => ({
-      ...prevMessages,
-      [newRoomId]: prevMessages[newRoomId] || [],
-    }))
+      ctx.setVisitedRooms((prevVisited) => {
+        const newVisited = new Set(prevVisited)
+        newVisited.add(newRoomId)
+        return newVisited
+      })
 
-    ctx.socket.emit('join_room', {
-      roomId: newRoomId,
-      username: ctx.username,
-    })
+      ctx.setMessages((prevMessages) => ({
+        ...prevMessages,
+        [newRoomId]: prevMessages[newRoomId] || [],
+      }))
+
+      ctx.socket.emit('join_room', {
+        roomId: newRoomId,
+        username: ctx.username,
+      })
+    }
   }
 
   return (
