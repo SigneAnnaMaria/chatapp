@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import socketIOClient from 'socket.io-client'
 import StartScreen from './components/StartScreen'
-import Lobby from './components/Lobby'
+import MainChatView from './components/MainChatView'
 import './App.css'
 import { useChat } from './components/ChatContext'
 
@@ -28,7 +28,7 @@ function App() {
 
   return (
     <div className="App">
-      <Lobby />
+      <MainChatView />
     </div>
   )
 }

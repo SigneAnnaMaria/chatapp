@@ -18,7 +18,7 @@ body {
   margin: 50px auto;
   padding: 20px;
   background-color: #ffffff;
-  border-radius: 20px;
+  border-radius: 15px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
@@ -27,47 +27,49 @@ body {
   height: 500px;
   overflow-y: auto;
   border: 1px solid #b0e0e6;
-  border-radius: 15px;
+  border-radius: 10px;
   padding: 10px;
   margin-bottom: 20px;
   max-height: 500px;
+  min-height: 250px;
 }
 
 .my-message,
 .other-message {
   display: inline-block;
-  border-radius: 20px !important;
+  border-radius: 15px !important;
   margin: 10px;
   padding: 10px;
   word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: calc(100% - 35% - 20px);
 }
 
 .message-sender {
   display: block;
   color: #778899;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   margin-bottom: 0px;
   margin-left: 1rem;
 }
 
 .my-message {
   text-align: right;
-  background-color: #00ced1;
-  border: 1px solid #20b2aa;
+  background-color: #00d1a4;
+  border: 1px solid #008c7a;
   color: white;
-  margin-left: auto;
-  margin-right: 0;
-  padding: 5px 20px;
+  margin-left: 35%;
+  padding: 5px 15px;
   float: right;
-  clear: both;
 }
 
 .other-message {
   text-align: left;
   background-color: #f0ffff;
   border: 1px solid #b0e0e6;
-  margin-right: auto;
-  padding: 5px 20px;
+  margin-left: auto;
+  margin-right: 35%;
+  padding: 5px 15px;
 }
 
 .chat-form {
@@ -77,42 +79,39 @@ body {
 }
 
 .custom-button {
-  background-color: #00ced1 !important;
+  background-color: #00d1a4;
   border: none;
   color: white;
-  padding: 8px 20px;
-  border-radius: 30px;
+  padding: 8px 15px;
+  border-radius: 20px;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .custom-button:hover {
-  background-color: #20b2aa !important;
+  background-color: #00b494;
 }
 
 .custom-button:active {
-  background-color: #178e88 !important;
+  background-color: #008c7a;
 }
 
 h4 {
-  color: #5f9ea0;
   margin-bottom: 20px;
 }
 
 .ListGroup {
   margin-bottom: 20px;
+  border-radius: 15px;
 }
 
-.Button {
-  background-color: #007bff;
-  border: none;
-  color: #ffffff;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
+.current-room {
+  font-weight: bold;
+  background-color: #f0ffff;
+  border: 1px solid #b0e0e6;
 }
 
-.Button:hover {
-  background-color: #0056b3;
+.current-room:focus {
+  background-color: #f0ffff;
+  border: 1px solid #b0e0e6;
 }

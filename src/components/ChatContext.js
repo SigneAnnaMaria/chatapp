@@ -17,7 +17,6 @@ export const ChatProvider = ({ children }) => {
   const [messages, setMessages] = useState({})
   const [rooms, setRooms] = useState([])
   const [users, setUsers] = useState([])
-  const [visitedRooms, setVisitedRooms] = useState(new Set(['Lobby']))
 
   return (
     <ChatContext.Provider
@@ -34,8 +33,6 @@ export const ChatProvider = ({ children }) => {
         setSocket,
         username,
         setUsername,
-        visitedRooms,
-        setVisitedRooms,
       }}
     >
       {children}

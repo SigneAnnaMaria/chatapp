@@ -8,7 +8,6 @@ const StartScreen = ({ onUsernameSubmit }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-
     if (typedName.trim()) {
       onUsernameSubmit(typedName.trim())
       ctx.socket.emit('join_room', {
@@ -27,6 +26,8 @@ const StartScreen = ({ onUsernameSubmit }) => {
           <Form onSubmit={handleSubmit}>
             <Form.Group className="mb-3">
               <Form.Control
+                name="username"
+                autoComplete="off"
                 type="text"
                 placeholder="Username"
                 value={typedName}

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button } from 'react-bootstrap'
-
 import MessageWindow from './MessageWindow'
 import { useChat } from './ChatContext'
 
@@ -9,17 +8,16 @@ const Chat = () => {
   const [inputMessage, setInputMessage] = useState('')
 
   useEffect(() => {
-    console.log('received message; ctx.visitedRooms', ctx.visitedRooms)
     const handleReceiveMessage = (messageContent) => {
-      if (ctx.visitedRooms.has(messageContent.room)) {
-        ctx.setMessages((prevMessages) => {
-          const roomMessages = prevMessages[messageContent.room] || []
-          return {
-            ...prevMessages,
-            [messageContent.room]: [...roomMessages, messageContent],
-          }
-        })
-      }
+      ctx.setMessages((prevMessages) => {
+        const newMessages = { ...prevMessages }
+        if (newMessages[messageContent.room]) {
+          newMessages[messageContent.room].push(messageContent)
+        } else {
+          newMessages[messageContent.room] = [messageContent]
+        }
+        return newMessages
+      })
     }
 
     ctx.socket.on('receive_message', handleReceiveMessage)
@@ -27,17 +25,10 @@ const Chat = () => {
     return () => {
       ctx.socket.off('receive_message', handleReceiveMessage)
     }
-  }, [ctx.socket, ctx.visitedRooms])
+    // eslint-disable-next-line
+  }, [ctx.socket, ctx.setMessages])
 
   const sendMessage = () => {
-    console.log('currentRoom')
-    console.log(ctx.currentRoom)
-    console.log('username')
-    console.log(ctx.username)
-    console.log('messages')
-    console.log(ctx.messages)
-    console.log('inputMessage')
-    console.log(inputMessage)
     if (inputMessage.trim()) {
       ctx.socket.emit('send_message', {
         room: ctx.currentRoom,
@@ -53,18 +44,19 @@ const Chat = () => {
       <div>
         <strong>User: {ctx.username}</strong>
       </div>
-
       <MessageWindow
         messages={ctx.messages[ctx.currentRoom] || []}
         username={ctx.username}
       />
       <Form className="chat-form" onSubmit={(e) => e.preventDefault()}>
         <Form.Control
+          name="message"
+          autoComplete="off"
           value={inputMessage}
           onChange={(e) => setInputMessage(e.target.value)}
           placeholder="Type a message"
         />
-        <Button className="custom-button" type="submit" onClick={sendMessage}>
+        <Button className="custom-button" onClick={sendMessage} type="submit">
           Send
         </Button>
       </Form>

@@ -7,7 +7,6 @@ const MessageWindow = () => {
   const messagesEndRef = useRef(null)
 
   useEffect(() => {
-    console.log(ctx.messages)
     if (messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' })
     }
